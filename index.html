@@ -1,62 +1,77 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-
-  <!-- Google tag (gtag.js) --> <script async src="https://www.googletagmanager.com/gtag/js?id=G-VGB5HP4V8R"></script> <script> window.dataLayer = window.dataLayer || []; function gtag(){dataLayer.push(arguments);} gtag('js', new Date()); gtag('config', 'G-VGB5HP4V8R'); </script>
-
-  
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LeetMetric</title>
-  <link rel="stylesheet" href="style.css">
-  <link rel="icon" type="image/x-icon" href="code.ico">
-  <meta name="description" content="LeetMetric - Track your LeetCode progress">
-  <meta name="keywords" content="LeetCode, LeetMetric, LeetCode Progress, LeetCode Stats, LeetCode Progress Tracker">
-  <meta name="author" content="Heta Shah">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LeetMetric</title>
+    
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <link rel="icon" type="image/x-icon" href="https://leetcode.com/favicon.ico">
+    <meta name="description" content="LeetMetric - Track your LeetCode progress with dynamic stats and visualizations.">
+    <meta name="keywords" content="LeetCode, LeetMetric, LeetCode Progress, LeetCode Stats, LeetCode Progress Tracker">
+    <meta name="author" content="Heta Shah">
 </head>
-
 <body>
 
-  <div class="container">
-    <h1 id="title">LeetMetric</h1>
-
-    <div class="user-container">
-      <label for="user-input" class="user-label">Enter your Leetcode username:</label>
-      <div class="user-input-container">
-        <input type="text" id="user-input" placeholder="Enter username here">
-        <button id="search-btn">Search</button>
-      </div>
+    <div class="video-background-holder">
+        <video playsinline="playsinline" autoplay="autoplay" muted="muted" loop="loop">
+            <source src="bg.mp4" type="video/mp4">
+        </video>
     </div>
 
-    <div class="stats-container">
+    <div class="container d-flex flex-column justify-content-center align-items-center min-vh-100">
+        <div class="content-wrapper p-4 p-md-5">
+            <h1 id="title" class="mb-4">LeetMetric</h1>
 
-      <!-- Progress -->
-      <div class="progress">
-        <!-- Easy -->
-        <div class="progress-item">
-          <div id="easy-progress" class="easy-progress circle"><span id="easy-label"></span>Easy</div>
-        </div>
-        <!-- Medium -->
-        <div class="progress-item">
-          <div id="medium-progress" class="medium-progress circle"><span id="medium-label"></span>Medium</div>
-        </div>
-        <!-- Hard -->
-        <div class="progress-item">
-          <div id="hard-progress" class="hard-progress circle"><span id="hard-label"></span>Hard</div>
-        </div>
-      </div>
+            <div class="w-100">
+                <label for="user-input" class="form-label user-label mb-2">Enter your LeetCode username:</label>
+                <div class="input-group">
+                    <input type="text" id="user-input" class="form-control" placeholder="e.g., username123" aria-label="LeetCode Username">
+                    <button id="search-btn" class="btn btn-dark" type="button">Search</button>
+                </div>
+            </div>
 
-      <!-- Stats -->
-      <div id="stats-cards" class="stats-cards">
-        <!-- directly populate cards here from JS code -->
-      </div>
+            <div id="loader" class="d-none text-center my-4">
+                <div class="spinner-border text-light" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
 
+            <div id="error-message" class="alert alert-danger d-none mt-4" role="alert"></div>
+
+            <div id="stats-container" class="mt-4 d-none">
+                <div class="row g-4 justify-content-center text-center">
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div id="easy-progress" class="circle" style="--border-color: #299f33; --bg-color: #283a2e;">
+                            <span id="easy-label">0 / 0</span>
+                            <p class="difficulty-label">Easy</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div id="medium-progress" class="circle" style="--border-color: #ffc11a; --bg-color: #4a3d20;">
+                            <span id="medium-label">0 / 0</span>
+                            <p class="difficulty-label">Medium</p>
+                        </div>
+                    </div>
+                    <div class="col-12 col-sm-6 col-md-4">
+                        <div id="hard-progress" class="circle" style="--border-color: #ef4743; --bg-color: #49282d;">
+                            <span id="hard-label">0 / 0</span>
+                            <p class="difficulty-label">Hard</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="stats-cards" class="row g-3 mt-4">
+                    </div>
+            </div>
+
+        </div>
     </div>
 
-  </div>
-
-  <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
-
 </html>
