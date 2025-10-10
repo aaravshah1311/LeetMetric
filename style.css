@@ -1,218 +1,194 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Courier New', Courier, monospace;
-  overflow-x: hidden;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Courier New', Courier, monospace;
 }
 
 body {
-  /* background-color: #a97844; */
-  background-image: url('https://images.pexels.com/photos/1089438/pexels-photo-1089438.jpeg');
-  background-size: cover;
-  background-repeat: no-repeat;
-  color: #333;
-  height: 100dvh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.2rem;
+    color: #f0f0f0;
 }
 
-.container {
-  background-color: #dbb790;
-  padding: 2rem;
-  margin: auto;
-  border-radius: 5px;
-  width: 90%;
-  max-width: 800px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-  align-items: center;
+/* Video Background Styling */
+.video-background-holder {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -100;
+    overflow: hidden;
+}
+
+.video-background-holder video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+/* Overlay for readability */
+.video-background-holder::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+}
+
+.content-wrapper {
+    background-color: rgba(40, 40, 40, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 15px;
+    width: 100%;
+    max-width: 850px;
+    box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    transition: all 0.3s ease-in-out;
 }
 
 h1 {
-  text-align: center;
-  color: #333;
-  font-size: 2.3rem;
-}
-
-#title {
-  font-family: 'Courier New', Courier, monospace;
-  letter-spacing: 2px;
-  animation: flicker 1.5s infinite alternate;
+    font-size: 2.8rem;
+    color: #fff;
+    letter-spacing: 3px;
+    animation: flicker 1.5s infinite alternate;
+    text-align: center;
 }
 
 @keyframes flicker {
-  0% {
-    opacity: 1;
-  }
-
-  100% {
-    opacity: 0.92;
-  }
-}
-
-
-.user-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.user-container label {
-  margin-bottom: 0.5rem;
-  font-weight: bold;
+    0%, 100% {
+        text-shadow: 0 0 5px #fff, 0 0 10px #fff, 0 0 15px #0073e6;
+        opacity: 1;
+    }
+    50% {
+        text-shadow: none;
+        opacity: 0.95;
+    }
 }
 
 .user-label {
-  color: #333;
-  font-size: 1.2rem;
+    font-weight: bold;
+    color: #eee;
+    font-size: 1.1rem;
 }
 
-#user-input {
-  width: 75%;
-  padding: 0.5rem;
-  margin-bottom: 0.5rem;
-  border: none;
-  border-radius: 5px;
-  font-size: 1rem;
-  font-weight: 600;
-  color: #333;
+#user-input.form-control {
+    background-color: #333;
+    color: #fff;
+    border: 1px solid #555;
+    font-size: 1.1rem;
+}
+
+#user-input.form-control:focus {
+    background-color: #444;
+    color: #fff;
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.25rem rgba(0, 123, 255, 0.25);
 }
 
 #search-btn {
-  width: 22%;
-  padding: 0.5rem;
-  background-color: #242424;
-  color: #fff;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
-  font-size: 1rem;
-  transition: background-color 0.3s ease-in-out;
+    transition: all 0.3s ease;
 }
 
-#search-btn:hover {
-  background-color: #333;
-}
-
-/* .stats-container {
-  display: none;
-} */
-
+/* Circular Progress Bar - UPDATED */
 .circle {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  border: 4px solid #299f33;
-  position: relative;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  color: #fff;
-  font-size: 1rem;
-  font-weight: 700;
-  margin: 0 auto;
-  /* made variable progress degree for progress bar and replacing percentage 0 with percentage of user's progress */
-  background: conic-gradient(#299f33 var(--progress-degree, 0%), #283a2e 0%);
-}
-
-.circle span {
-  position: relative;
-  z-index: 2;
-}
-
-.progress {
-  display: flex;
-  flex-direction: row;
-  /* justify-content: space-between; */
-  justify-content: center;
-  align-items: center;
-  flex-wrap: wrap;
-  width: 100%;
-  gap: 1.5rem;
-  margin-top: 1rem;
-}
-
-.stats-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.card {
-  background-color: #fefefe;
-  padding: 1rem;
-  border-radius: 8px;
-  box-shadow: 0 0 5px rgba(0, 0, 0, 0.15);
-  color: #fff;
-  font-size: 1.2rem;
-  font-weight: 700;
-  width: 200px;
-  height: auto;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  min-width: 150px;
-  text-align: center;
-}
-
-@media (max-width: 600px) {
-
-  h1 {
-    font-size: 1.4rem;
-  }
-
-  .container {
-    width: 80%;
-    padding: 1rem;
-    margin: 20px auto;
-    box-shadow: none;
-  }
-
-  body {
-    font-size: 0.6rem;
-    line-height: 1.5;
-    margin: 0;
-    height: auto;
-    padding: 20px 0 45px 0;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    border: 4px solid var(--border-color);
+    position: relative;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-  }
+    color: #fff;
+    font-size: 1.2rem;
+    font-weight: 700;
+    margin: 0 auto;
+    transition: background 1s ease-in-out;
+    
+    /* NEW: This creates the partition effect */
+    --partition-width: 3deg;
+    background: conic-gradient(
+        var(--border-color) 0deg,
+        var(--border-color) max(0deg, calc(var(--progress-degree) - var(--partition-width))),
+        var(--border-color-light) max(0deg, calc(var(--progress-degree) - var(--partition-width))),
+        var(--border-color-light) var(--progress-degree),
+        var(--bg-color) var(--progress-degree),
+        var(--bg-color) 360deg
+    );
+}
 
-  .user-container {
-    flex-direction: column;
-  }
+/* NEW: Define the lighter partition colors for each circle */
+#easy-progress { --border-color-light: #6de075; }
+#medium-progress { --border-color-light: #ffe45c; }
+#hard-progress { --border-color-light: #ff7a78; }
 
-  #user-input {
-    width: 100%;
-    margin-bottom: 0.5rem;
-    font-weight: 600;
-  }
 
-  #search-btn {
-    width: 100%;
-  }
+.circle span {
+    position: relative;
+    z-index: 2;
+}
 
-  .progress {
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .card {
-    width: 100%;
-  }
-
-  .circle {
-    width: 120px;
-    height: 120px;
+.difficulty-label {
+    margin: 0;
     font-size: 0.9rem;
-  }
+    font-weight: normal;
+    color: #ccc;
+}
+
+/* Stats Cards */
+.card {
+    background-color: rgba(60, 60, 60, 0.7);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+}
+
+.card-title {
+    font-size: 1rem;
+    color: #aaa;
+    margin-bottom: 0.5rem;
+    font-weight: normal;
+}
+
+.card-text {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+/* Fade-in Animation for Stats */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.8s ease-in-out forwards;
+}
+
+@media (max-width: 768px) {
+    h1 {
+        font-size: 2rem;
+    }
+    .circle {
+        width: 130px;
+        height: 130px;
+        font-size: 1rem;
+    }
 }
