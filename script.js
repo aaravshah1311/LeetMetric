@@ -217,33 +217,40 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
     // --- Comparison Functions ---
-    async function compareUsers(username1, username2) {
-        currentlyDisplayedUser = null;
-        
-        // Use a separate fetch function for comparison to avoid display side-effects
-        const fetchForCompare = async (username) => {
-            const cached = getCachedData(username);
-            if(cached) return cached;
-            // FIX: The URL has been corrected to the working endpoint
-            const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
-            if(!response.ok) throw new Error(`Failed to fetch data for ${username}`);
-            const data = await response.json();
-            setCachedData(username, data);
-            return data;
-        }
+    async function compareUsers(username1, username2) {
+        currentlyDisplayedUser = null;
+        
+        const fetchForCompare = async (username) => {
+            const cached = getCachedData(username);
+            if(cached) return cached;
+            const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
+            if(!response.ok) throw new Error(`Failed to fetch data for ${username}`);
+            const data = await response.json();
+            setCachedData(username, data);
+            return data;
+        }
 
-        try {
-            const [data1, data2] = await Promise.all([
-                fetchForCompare(username1),
-                fetchForCompare(username2)
-            ]);
-            displayComparison(data1, data2, username1, username2);
-        } catch(error) {
-            showError(error.message);
-        }
-    }
+        try {
+            const [data1, data2] = await Promise.all([
+                fetchForCompare(username1),
+                fetchForCompare(username2)
+            ]);
+            displayComparison(data1, data2, username1, username2);
+        } catch(error) {
+            showError(error.message);
+        }
+    }
 
     function displayComparison(data1, data2, username1, username2) {
+        let winnerClass1 = '';
+        let winnerClass2 = '';
+
+        if (data1.ranking < data2.ranking) {
+            winnerClass1 = 'winner';
+        } else if (data2.ranking < data1.ranking) {
+            winnerClass2 = 'winner';
+        }
+
         const fieldsToCompare = {
             'Total Solved': 'totalSolved',
             'Easy Solved': 'easySolved',
@@ -257,8 +264,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         let comparisonHtml = `
             <div class="row text-center mb-3">
-                <div class="col-6"><h3>${username1}</h3></div>
-                <div class="col-6"><h3>${username2}</h3></div>
+                <div class="col-6"><h3 class="${winnerClass1}">${username1}</h3></div>
+                <div class="col-6"><h3 class="${winnerClass2}">${username2}</h3></div>
             </div>
         `;
 
@@ -306,7 +313,6 @@ document.addEventListener("DOMContentLoaded", function () {
             try {
                 await fetchUserDetails(username);
             } finally {
-                // **FIX: This block now correctly resets the button state**
                 searchButton.textContent = "Search";
                 searchButton.disabled = false;
             }
@@ -335,7 +341,6 @@ document.addEventListener("DOMContentLoaded", function () {
             try {
                 await compareUsers(username1, username2);
             } finally {
-                // **FIX: This block now correctly resets the button state**
                 compareButton.textContent = "Compare";
                 compareButton.disabled = false;
             }
