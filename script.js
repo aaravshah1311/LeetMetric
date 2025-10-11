@@ -134,7 +134,7 @@ document.addEventListener("DOMContentLoaded", function () {
             return cachedData;
         }
         
-        const url = `https://alfa-leetcode-api.onrender.com/${username}`;
+        const url = `https://leetcode-stats-api.herokuapp.com/${username}`;
 
         try {
             const response = await fetch(url);
@@ -217,30 +217,31 @@ document.addEventListener("DOMContentLoaded", function () {
     }
     
     // --- Comparison Functions ---
-    async function compareUsers(username1, username2) {
-        currentlyDisplayedUser = null;
-        
-        // Use a separate fetch function for comparison to avoid display side-effects
-        const fetchForCompare = async (username) => {
-            const cached = getCachedData(username);
-            if(cached) return cached;
-            const response = await fetch(`https://alfa-leetcode-api.onrender.com/${username}`);
-            if(!response.ok) throw new Error(`Failed to fetch data for ${username}`);
-            const data = await response.json();
-            setCachedData(username, data);
-            return data;
-        }
+    async function compareUsers(username1, username2) {
+        currentlyDisplayedUser = null;
+        
+        // Use a separate fetch function for comparison to avoid display side-effects
+        const fetchForCompare = async (username) => {
+            const cached = getCachedData(username);
+            if(cached) return cached;
+            // FIX: The URL has been corrected to the working endpoint
+            const response = await fetch(`https://leetcode-stats-api.herokuapp.com/${username}`);
+            if(!response.ok) throw new Error(`Failed to fetch data for ${username}`);
+            const data = await response.json();
+            setCachedData(username, data);
+            return data;
+        }
 
-        try {
-            const [data1, data2] = await Promise.all([
-                fetchForCompare(username1),
-                fetchForCompare(username2)
-            ]);
-            displayComparison(data1, data2, username1, username2);
-        } catch(error) {
-            showError(error.message);
-        }
-    }
+        try {
+            const [data1, data2] = await Promise.all([
+                fetchForCompare(username1),
+                fetchForCompare(username2)
+            ]);
+            displayComparison(data1, data2, username1, username2);
+        } catch(error) {
+            showError(error.message);
+        }
+    }
 
     function displayComparison(data1, data2, username1, username2) {
         const fieldsToCompare = {
