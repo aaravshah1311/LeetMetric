@@ -75,14 +75,14 @@ h1 {
     font-size: 1.1rem;
 }
 
-#user-input.form-control {
+#user-input.form-control, #user-input-2.form-control {
     background-color: #333;
     color: #fff;
     border: 1px solid #555;
     font-size: 1.1rem;
 }
 
-#user-input.form-control:focus {
+#user-input.form-control:focus, #user-input-2.form-control:focus {
     background-color: #444;
     color: #fff;
     border-color: #007bff;
@@ -182,6 +182,47 @@ h1 {
     animation: fadeIn 0.8s ease-in-out forwards;
 }
 
+/* New Styles for Comparison View */
+.comparison-row {
+    padding: 0.5rem 0;
+    border-bottom: 1px solid #444;
+}
+
+.comparison-row:last-child {
+    border-bottom: none;
+}
+
+.text-success {
+    color: #28a745 !important;
+    font-weight: bold;
+}
+
+.winner {
+    color: #ffd700;
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+}
+
+.winner::before {
+    content: '👑';
+    position: absolute;
+    right: 100%;
+    margin-right: 8px;
+    top: 0;
+}
+
+.winner::after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #ffd700;
+}
+
+
 @media (max-width: 768px) {
     h1 {
         font-size: 2rem;
@@ -190,5 +231,9 @@ h1 {
         width: 130px;
         height: 130px;
         font-size: 1rem;
+    }
+    .winner::before {
+        font-size: 0.8em;
+        margin-right: 5px; /* Adjust spacing for smaller screens */
     }
 }
